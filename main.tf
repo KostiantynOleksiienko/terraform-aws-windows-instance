@@ -28,7 +28,7 @@ data "aws_ami" "windows_ami" {
 
   filter {
     name   = "name"
-    values = ["Windows_Server-1809-English-Core-ContainersLatest-2019.05.15"]
+    values = ["Windows_Server-1809-English-Core-ContainersLatest-2019.09.11"]
   }
 }
 
@@ -40,7 +40,7 @@ resource "tls_private_key" "private_key" {
 
 resource "aws_key_pair" "windowskey" {
   count      = "${var.num > 0 ? 1 : 0}"
-  key_name   = "${var.cluster_name}-windowskey"
+  key_name   = "${var.cluster_name}-windowskey-python"
   public_key = "${element(tls_private_key.private_key.*.public_key_openssh, 0)}"
 }
 
